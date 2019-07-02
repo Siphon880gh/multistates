@@ -1,0 +1,14 @@
+{
+  "name": "flash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "concurrently 'compass watch ./' 'livereload .'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "watch": "^1.0.2"
+  }
+}

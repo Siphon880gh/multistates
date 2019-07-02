@@ -1,0 +1,3 @@
+$(()=> {
+    $("#example").multistates({$animatedDom:$("#example")});
+});
