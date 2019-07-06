@@ -27,10 +27,11 @@ $.fn.multistates = function(options) {
         var options = $.extend(true, options, {
             // key: condition?... defaultValue
             $animatedDom: (typeof options.$animatedDom!=="undefined")?  options.$animatedDom: undefined,
+            callback: (typeof options.callback!=="undefined")?  options.callback: undefined
         });
 
         // Main functionality
-        var {$animatedDom} = options;
+        var {$animatedDom, callback} = options;
         // debugger;
         var startTime, endTime, longpress;
         let $pAny = $el.find(".p1, .p2, .p3, .p4");
@@ -98,19 +99,27 @@ $.fn.multistates = function(options) {
             // If shift clicking, then treat as ministate switching
             if(window.multistates_holdingShift) {
                 checkDelegator(event);
+
+                if(typeof callback!=="undefined") {
+                    callback.apply(this, arguments);
+                }
+
                 return false;
             }
 
-            const $p = $(event.target),
-                pNum = $p.index(),
-                $data = $p.closest(".data-wrapper");
-
-
-            if( longpress ) {
+            else if( longpress ) {
                 checkDelegator(event);
                 event.preventDefault();
+
+                if(typeof callback!=="undefined") {
+                    callback.apply(this, arguments);
+                }
                 
-            } else {
+            } else { // short press
+
+                const $p = $(event.target),
+                    pNum = $p.index(),
+                    $data = $p.closest(".data-wrapper");
 
                 if( $p.hasClass("parentheses") ) {
                     $p.removeClass("checked");
@@ -144,9 +153,14 @@ $.fn.multistates = function(options) {
                     $data.attr("data-states", newPrimary);
                     event.preventDefault();
                 } // else
-            } // shortpress
-        }); // on click
 
+
+                if(typeof callback!=="undefined") {
+                    callback.apply(this, arguments);
+                }
+            } // shortpress
+
+        }); // on click
 
     }); // Dom returned
 } // multistates plugin
