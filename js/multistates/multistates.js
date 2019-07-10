@@ -44,7 +44,7 @@ $.fn.multistates = function(options) {
             $p.toggleClass("checked");
         
             // Replace primary at ith position
-            let oldPrimary = $data.data("states"),
+            let oldPrimary = $data.attr("data-states"),
                 newPrimary = oldPrimary.substr(0, pNum) + oldPrimary[pNum].toUpperCase() + oldPrimary.substr(pNum + 1);
             $data.attr("data-states", newPrimary);
         
@@ -89,6 +89,10 @@ $.fn.multistates = function(options) {
         $pAny.on("contextmenu", (event)=>{
             checkDelegator(event);
             event.preventDefault();
+
+            if(typeof callback!=="undefined") {
+                callback.apply(this, arguments);
+            }
         }) // on contextmenu
         
         // primary state switching
@@ -127,7 +131,7 @@ $.fn.multistates = function(options) {
                     $p.addClass("square-brackets");
 
                     // Replace primary at ith position
-                    let oldPrimary = $data.data("states"),
+                    let oldPrimary = $data.attr("data-states"),
                         newPrimary = oldPrimary.substr(0, pNum) + 's' + oldPrimary.substr(pNum + 1);
                     $data.attr("data-states", newPrimary);
                     event.preventDefault();
@@ -138,7 +142,7 @@ $.fn.multistates = function(options) {
                     $p.removeClass("square-brackets");
 
                     // Replace primary at ith position
-                    let oldPrimary = $data.data("states"),
+                    let oldPrimary = $data.attr("data-states"),
                         newPrimary = oldPrimary.substr(0, pNum) + 'c' + oldPrimary.substr(pNum + 1);
                     $data.attr("data-states", newPrimary);
                     event.preventDefault();
@@ -148,7 +152,7 @@ $.fn.multistates = function(options) {
                     $p.removeClass("square-brackets");
 
                     // Replace primary at ith position
-                    let oldPrimary = $data.data("states"),
+                    let oldPrimary = $data.attr("data-states"),
                         newPrimary = oldPrimary.substr(0, pNum) + 'p' + oldPrimary.substr(pNum + 1);
                     $data.attr("data-states", newPrimary);
                     event.preventDefault();
