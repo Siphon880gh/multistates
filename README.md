@@ -38,7 +38,7 @@ We need jQuery because this is a jQuery plugin. We also need jQuery mobile, jQue
 
 ### Running
 
-Html markup
+__Html Markup__
 ```
 <div id="example">
     <aside class="multistates">
@@ -52,7 +52,7 @@ Html markup
 </div>
 ```
 
-Js initiation
+__Js Initiation__
 ```
 // If want to flash green on a DOM if you switched ministate (regular vs checkmarked)
 $("#example").multistates({$animatedDom:$("#example")});
@@ -60,6 +60,23 @@ $("#example").multistates({$animatedDom:$("#example")});
 // If don't want animation:
 $("#example").multistates();
 ```
+
+__State Manipulation__
+
+You can programmatically read or set the component's states with this code:
+```
+Multistates.setStates($("#some-multistate-wrapper"), "cPcS"); // sets the component to cPcS
+Multistates.getStates($("#some-multistate-wrapper")); // returns cPcS
+```
+
+This will allow you to persist data into a database.
+
+__Legends__
+
+c = blank, C = checkmark
+p = parentheses, P = parentheses with checkmark
+s = square brackets, S = square brackets with checkmark
+
 
 ## Customization
 
